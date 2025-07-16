@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LCx1ViyZvKY=",
+  "dgSpecHash": "DFZ5+WfuaiM=",
   "success": true,
-  "projectFilePath": "D:\\code\\LittleFishStation\\SP6.csproj",
+  "projectFilePath": "d:\\code\\LittleFishStation\\SP6.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
