@@ -1,0 +1,10 @@
+﻿<header class="header">
+    <div class="header-container">
+        <a href="@Url.Action("Index", "Home", new { area = "Khachhang" })" class="logo">LittleFish</a>
+        <nav class="nav">
+            <a href="@Url.Action("Index", "Home", new { area = "Khachhang" })" class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">Trang chủ</a>
+            <a href="@Url.Action("Index", "Booking", new { area = "Khachhang" })" class="@(ViewContext.RouteData.Values["controller"].ToString() == "Booking" ? "active" : "")">Đặt chỗ</a>
+            <a href="@Url.Action("Index", "Info", new { area = "Khachhang" })" class="@(ViewContext.RouteData.Values["controller"].ToString() == "Info" ? "active" : "")">Thông tin</a>
+        </nav>
+    </div>
+</header>

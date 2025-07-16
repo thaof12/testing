@@ -1,0 +1,149 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SP6
+build_property.RootNamespace = SP6
+build_property.ProjectDir = D:\code\LittleFishStation\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\code\LittleFishStation
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/Bida/Ban.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmlkYVxCYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/Bida/Gia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmlkYVxHaWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/Bida/Lichsu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmlkYVxMaWNoc3UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/Bida/trangthai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmlkYVx0cmFuZ3RoYWkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/kara/DanhSachPhong.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3Nca2FyYVxEYW5oU2FjaFBob25nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/kara/Gia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3Nca2FyYVxHaWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/kara/LichSu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3Nca2FyYVxMaWNoU3UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/kara/Trangthai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3Nca2FyYVxUcmFuZ3RoYWkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/menu/combo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcbWVudVxjb21iby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/menu/menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcbWVudVxtZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/nhanvien/Nhanvien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcbmhhbnZpZW5cTmhhbnZpZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Admin/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Booking/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXEJvb2tpbmdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXEhvbWVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Info/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXEluZm9cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXFNoYXJlZFxfRm9vdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Shared/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXFNoYXJlZFxfSGVhZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Khachhang/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcS2hhY2hoYW5nXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Thungan/Views/Thungan/DSdatcho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVGh1bmdhblxWaWV3c1xUaHVuZ2FuXERTZGF0Y2hvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Thungan/Views/Thungan/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVGh1bmdhblxWaWV3c1xUaHVuZ2FuXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Thungan/Views/Thungan/Pay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVGh1bmdhblxWaWV3c1xUaHVuZ2FuXFBheS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Areas/Thungan/Views/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVGh1bmdhblxWaWV3c1xfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/LittleFishStation/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-3xjnlzs9le

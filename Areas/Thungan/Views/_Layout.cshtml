@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống thu ngân</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="thungan.css">
+    <style>
+        .service-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .service-box { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px #0001; padding: 1rem; width: 220px; margin-bottom: 1rem; }
+        .service-title { font-size: 1.1rem; font-weight: 600; margin-bottom: .5rem; }
+        .status { font-size: .85rem; margin-bottom: .5rem; display: inline-block; }
+        .status-inactive { color: #888; }
+        .status-select { min-width: 120px; }
+        .btn-action { min-width: 90px; margin-right: 4px; }
+        .table th, .table td { vertical-align: middle; }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container py-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center" style="width:48px; height:48px;">
+                        <img src="https://placehold.co/40x40" alt="Biểu tượng hệ thống thu ngân" style="width:32px; height:32px;">
+                    </div>
+                    <h1 class="h5 fw-bold text-dark mb-0">Hệ thống thu ngân</h1>
+                </div>
+                <ul class="nav nav-tabs border-0" id="mainTabs" role="tablist">
+                    <li class="nav-item" role="presentation"></li>
+                        <a href="/Thungan/Index" class="nav-link" >
+                            Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="/Thungan/DSdatcho" class="nav-link">
+                            Danh sách đặt chỗ
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="/Thungan/Pay" class="nav-link">
+                            Thanh toán
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center" style="width:40px; height:40px;">
+                        <img src="https://placehold.co/40x40" alt="Ảnh đại diện" class="rounded-circle" style="width:32px; height:32px;">
+                    </div>
+                    <span class="small fw-medium">Nhân viên thu ngân</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+</body>
+</html>

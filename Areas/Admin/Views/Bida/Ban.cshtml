@@ -1,0 +1,372 @@
+@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Quản lý Bàn Bida";
+}
+
+<div class="flex h-screen">
+    <!-- Sidebar Navigation -->
+   <div class="w-64 bg-blue-800 text-white flex flex-col fixed top-0 left-0 h-full">
+        <h1 class="text-2xl font-bold mb-6 text-center">Quản Lý Bida</h1>
+        <nav class="flex-1">
+            <div class="space-y-2">
+                <button class="w-full flex items-center space-x-3 p-3 rounded-lg text-left hover:bg-blue-700 active-tab">
+                    <i class="fas fa-table"></i>
+                    <span>Quản lý Bàn Bida</span>
+                </button>
+                <a href="/Admin/Bida/Gia" class="w-full flex items-center space-x-3 p-3 rounded-lg text-left hover:bg-blue-700">
+                    <i class="fas fa-cog"></i>
+                    <span>Cấu hình Giá</span>
+                </a>
+                <a href="/Admin/Bida/LichSu" class="w-full flex items-center space-x-3 p-3 rounded-lg text-left hover:bg-blue-700">
+                    <i class="fas fa-history"></i>
+                    <span>Lịch sử Sử dụng</span>
+                </a>
+                <a href="/Admin/Bida/TrangThai" class="w-full flex items-center space-x-3 p-3 rounded-lg text-left hover:bg-blue-700">
+                    <i class="fas fa-eye"></i>
+                    <span>Theo dõi Trạng thái</span>
+                </a>
+            </div>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-blue-700 pb-16">
+            <div class="flex items-center space-x-3 px-2 py-3 rounded-lg bg-blue-900">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2e37b4f6-1d19-4331-b5f5-ad699657bb48.png" alt="User profile picture" class="rounded-full w-12 h-12 border-2 border-blue-400 shadow">
+                <div>
+                    <div class="font-semibold text-lg leading-tight">Admin</div>
+                    <div class="text-xs text-blue-200 italic">Quản trị viên</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-64 flex-1  p-6">
+        <!-- Danh sách Bàn -->
+        <div>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Quản lý Bàn Bida</h2>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center"
+                        onclick="openTableModal()">
+                    <i class="fas fa-plus mr-2"></i>
+                    Thêm Bàn Mới
+                </button>
+            </div>
+            <div class="bg-white rounded-lg shadow mb-6 p-4">
+    <form method="get" action="@Url.Action("Ban", "Bida", new { area = "Admin" })">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Bộ lọc</h3>
+            <button type="submit" name="reset" value="1" class="text-blue-600">Đặt lại</button>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Loại Bàn</label>
+                <select name="maLoaiBan" class="w-full border rounded px-3 py-2">
+                    <option value="">Tất cả</option>
+                    @foreach (var loai in ViewBag.LoaiBanBida ?? new List<dynamic>())
+                    {
+                        <option value="@loai.MaLoaiBan" @(ViewBag.SelectedLoaiBan != null && (int)ViewBag.SelectedLoaiBan == loai.MaLoaiBan ? "selected" : "")>
+                            @loai.TenLoai
+                        </option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Trạng thái</label>
+                <select name="trangThai" class="w-full border rounded px-3 py-2">
+                    <option @(string.IsNullOrEmpty(ViewBag.SelectedTrangThai) ? "selected" : "")>Tất cả</option>
+                    <option value="Bảo trì" @(ViewBag.SelectedTrangThai == "Bảo trì" ? "selected" : "")>Bảo trì</option>
+                    <option value="Hoạt động" @(ViewBag.SelectedTrangThai == "Hoạt động" ? "selected" : "")>Hoạt động</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Sắp xếp</label>
+                <select name="sortOrder" class="w-full border rounded px-3 py-2">
+                    <option value="asc" @(ViewBag.SortOrder == null || ViewBag.SortOrder == "asc" ? "selected" : "")>Số bàn (tăng dần)</option>
+                    <option value="desc" @(ViewBag.SortOrder == "desc" ? "selected" : "")>Số bàn (giảm dần)</option>
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
+                    Áp dụng
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-200" id="table-list-view">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số bàn</th>
+                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên bàn</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Loại</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Giờ/Giá</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var ban in Model)
+                            {
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">@ban.MaBan</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">@ban.TenBan</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">@ban.MaLoaiBanNavigation?.TenLoai</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">@ban.TrangThai</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @{
+                                            var giaMacDinh = ViewBag.GiaMacDinhDict != null && ViewBag.GiaMacDinhDict.ContainsKey(ban.MaBan)
+                                                ? (decimal)ViewBag.GiaMacDinhDict[ban.MaBan]
+                                                : 0;
+                                        }
+                                        @giaMacDinh.ToString("N0") đ/giờ
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <!-- Hành động: Sửa/Xóa -->
+                                        <button type="button"
+                                                class="text-blue-600 hover:underline mr-2 btn-edit"
+                                                data-maban="@ban.MaBan"
+                                                data-tenban="@ban.TenBan"
+                                                data-maloaiban="@ban.MaLoaiBan"
+                                                data-trangthai="@ban.TrangThai">
+                                            Sửa
+                                        </button>
+                                        <form action="@Url.Action("Xoa", "Bida", new { area = "Admin" })" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa bàn này?');">
+                                            <input type="hidden" name="id" value="@ban.MaBan" />
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="text-red-600 hover:underline">Xóa</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal Thêm Bàn -->
+        <div id="tableModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+                <form id="addTableForm" method="post" action="@Url.Action("Them", "Bida", new { area = "Admin" })">
+                    @Html.AntiForgeryToken()
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">Thêm Bàn Mới</h3>
+                            <button type="button" onclick="closeTableModal()" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Số bàn</label>
+                                <input type="text" name="TenBan" id="add_TenBan" class="w-full border rounded px-3 py-2" placeholder="B1, B2, VIP1..." required>
+                                <span id="tenBanError" class="text-red-600 text-xs hidden">Tên bàn đã tồn tại!</span>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Loại bàn</label>
+                                <select name="MaLoaiBan" id="add_SelectLoaiBan" class="w-full border rounded px-3 py-2" required>
+                                    <option value="" disabled selected>Chọn loại bàn</option>
+                                    @foreach (var loai in ViewBag.LoaiBanBida ?? new List<dynamic>())
+                                    {
+                                        <option value="@loai.MaLoaiBan">@loai.TenLoai</option>
+                                    }
+                                    <option value="__new__">Thêm loại bàn mới...</option>
+                                </select>
+                                <input type="text" name="TenLoaiBan" id="add_InputLoaiBan" class="w-full border rounded px-3 py-2 mt-2 hidden" placeholder="Nhập tên loại bàn mới" />
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" onclick="closeTableModal()" class="px-4 py-2 border rounded hover:bg-gray-100">
+                                Hủy
+                            </button>
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                Lưu Thông Tin
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Sửa Bàn -->
+        <div id="editTableModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+                <form id="editTableForm" method="post" action="@Url.Action("Sua", "Bida", new { area = "Admin" })">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="MaBan" id="edit_MaBan" />
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">Sửa Thông Tin Bàn</h3>
+                            <button type="button" onclick="closeEditTableModal()" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Số bàn</label>
+                                <input type="text" name="TenBan" id="edit_TenBan" class="w-full border rounded px-3 py-2" required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Loại bàn</label>
+                                <select name="MaLoaiBan" id="edit_MaLoaiBan" class="w-full border rounded px-3 py-2" required>
+                                    @foreach (var loai in ViewBag.LoaiBanBida ?? new List<dynamic>())
+                                    {
+                                        <option value="@loai.MaLoaiBan">@loai.TenLoai</option>
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Trạng thái</label>
+                                <select name="TrangThai" id="edit_TrangThai" class="w-full border rounded px-3 py-2" required>
+                                    <option value="Bảo trì">Bảo trì</option>
+                                    <option value="Hoạt động">Hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" onclick="closeEditTableModal()" class="px-4 py-2 border rounded hover:bg-gray-100">
+                                Hủy
+                            </button>
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                Cập nhật
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        function openTableModal() {
+            document.getElementById('tableModal').classList.remove('hidden');
+        }
+
+        function closeTableModal() {
+            document.getElementById('tableModal').classList.add('hidden');
+        }
+
+        function openEditTableModal(maBan, tenBan, maLoaiBan, trangThai) {
+            document.getElementById('edit_MaBan').value = maBan;
+            document.getElementById('edit_TenBan').value = tenBan;
+            // Gán giá trị cho select loại bàn
+            var select = document.getElementById('edit_MaLoaiBan');
+            if (select) {
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value == String(maLoaiBan)) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            // Gán giá trị cho select trạng thái
+            var trangThaiSelect = document.getElementById('edit_TrangThai');
+            if (trangThaiSelect) {
+                for (var i = 0; i < trangThaiSelect.options.length; i++) {
+                    if (trangThaiSelect.options[i].value == trangThai) {
+                        trangThaiSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            document.getElementById('editTableModal').classList.remove('hidden');
+        }
+
+        function closeEditTableModal() {
+            document.getElementById('editTableModal').classList.add('hidden');
+        }
+
+        // Cập nhật giá mặc định khi chọn loại bàn
+        document.getElementById('add_SelectLoaiBan').addEventListener('change', function () {
+            var select = this;
+            var input = document.getElementById('add_InputLoaiBan');
+            var giaMacDinh = document.getElementById('add_GiaMacDinh');
+            if (select.value === '__new__') {
+                input.classList.remove('hidden');
+                input.required = true;
+                select.name = ''; // Không gửi MaLoaiBan
+                input.name = 'TenLoaiBan'; // Gửi TenLoaiBan
+        
+            } else {
+                input.classList.add('hidden');
+                input.required = false;
+                input.name = '';
+                select.name = 'MaLoaiBan'; // Gửi MaLoaiBan
+                var selectedOption = select.options[select.selectedIndex];
+                var gia = selectedOption.getAttribute('data-giagio');
+                giaMacDinh.value = gia ? parseInt(gia).toLocaleString('vi-VN') : 0;
+            }
+        });
+
+        // Khi mở modal thêm mới thì reset về mặc định
+        function openTableModal() {
+            document.getElementById('tableModal').classList.remove('hidden');
+            var select = document.getElementById('add_SelectLoaiBan');
+            var input = document.getElementById('add_InputLoaiBan');
+            var giaMacDinh = document.getElementById('add_GiaMacDinh');
+            select.selectedIndex = 0;
+            select.name = 'MaLoaiBan';
+            input.classList.add('hidden');
+            input.required = false;
+            input.name = '';
+            giaMacDinh.value = 0;
+        }
+
+        // Lấy danh sách tên bàn đã có từ server (render ra JS array)
+        var existingTenBan = [
+            @foreach (var ban in Model ?? new List<dynamic>())
+            {
+                @Html.Raw($"'{ban.TenBan?.Replace("'", "\\'")}',")
+            }
+        ];
+        // Event delegation for edit buttons
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('btn-edit')) {
+                const button = event.target;
+                const maBan = button.getAttribute('data-maban');
+                const tenBan = button.getAttribute('data-tenban');
+                const maLoaiBan = button.getAttribute('data-maloaiban');
+                const trangThai = button.getAttribute('data-trangthai');
+                openEditTableModal(maBan, tenBan, maLoaiBan, trangThai);
+            }
+        });
+
+        // Kiểm tra trùng tên bàn khi nhập
+        document.getElementById('add_TenBan').addEventListener('input', function () {
+            var value = this.value.trim().toLowerCase();
+            var error = document.getElementById('tenBanError');
+            var isDuplicate = existingTenBan.some(function (ten) {
+                return ten.toLowerCase() === value;
+            });
+            if (isDuplicate) {
+                error.classList.remove('hidden');
+                this.setCustomValidity('Tên bàn đã tồn tại');
+            } else {
+                error.classList.add('hidden');
+                this.setCustomValidity('');
+            }
+        });
+        // Kiểm tra trùng tên bàn khi sửa
+        document.getElementById('edit_TenBan').addEventListener('input', function () {
+            var value = this.value.trim().toLowerCase();
+            var error = document.getElementById('tenBanError');
+            var isDuplicate = existingTenBan.some(function (ten) {
+                return ten.toLowerCase() === value && ten !== this.value.trim().toLowerCase();
+            }.bind(this));
+            if (isDuplicate) {
+                error.classList.remove('hidden');
+                this.setCustomValidity('Tên bàn đã tồn tại');
+            } else {
+                error.classList.add('hidden');
+                this.setCustomValidity('');
+            }
+        });
+        
+
+        
+    </script>
+ 
+}

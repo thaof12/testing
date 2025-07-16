@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LittleFish Station Club</title>
+    @RenderSection("FrameworkCss", required: false)
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    @RenderSection("PageCss", required: false)
+</head>
+<body>
+    @Html.Partial("_Header")
+    <main>
+        @RenderBody()
+    </main>
+    @Html.Partial("_Footer")
+    @RenderSection("FrameworkJs", required: false)
+    @RenderSection("PageJs", required: false)
+</body>
+</html>

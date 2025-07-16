@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "Đặt chỗ";
+    Layout = "~/Areas/Khachhang/Views/Shared/_Layout.cshtml";
+}
+@section FrameworkCss {
+    <script src="https://cdn.tailwindcss.com"></script>
+}
+@section PageCss {
+    <link rel="stylesheet" href="~/css/Khachhang/datcho.css" />
+}
+@section FrameworkJs {
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+}
+@section PageJs {
+    <script src="~/js/Khachhang/datcho.js"></script>
+}
+
+<div class="container mx-auto p-4 max-w-6xl" x-data="fnbApp()">
+    <!-- Room Info -->
+    <div class="bg-white rounded-lg shadow-md p-4 mb-6 flex justify-between items-center">
+        <div>
+            <h2 class="text-xl font-bold">Phòng Karaoke VIP 201</h2>
+            <p class="text-gray-600">Thời gian: 14:00 - 17:00 | 25/06/2024</p>
+        </div>
+        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium text-sm">
+            Đang sử dụng
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Menu Section -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <!-- Icon menu -->
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    Menu
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <template x-for="item in menu" :key="item.id">
+                        <div class="bg-gray-100 rounded-lg shadow-md overflow-hidden flex flex-col">
+                            <div class="h-40 md:h-48 bg-gray-200 flex items-center justify-center">
+                                <img :src="item.image" :alt="item.name" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400?text=Image+Not+Available'">
+                            </div>
+                            <div class="p-2 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-lg" x-text="item.name"></h4>
+                                    <p class="text-gray-600 text-sm mb-2" x-text="item.description"></p>
+                                </div>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="font-bold text-blue-600" x-text="formatCurrency(item.price)"></span>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" min="1" x-model="item.quantity" class="w-10 border border-gray-300 rounded-md text-center">
+                                        <button x-on:click ="addToCart(item)" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded-full text-sm flex items-center justify-center">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                <path d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart and Order Status Section -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <!-- Icon cart -->
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
+                    Giỏ hàng
+                    <span class="ml-2 bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm" x-text="cart.length"></span>
+                </h3>
+                <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
+                    <template x-for="(item, index) in cart" :key="index">
+                        <div class="flex justify-between items-center p-2 border-b border-gray-200">
+                            <div>
+                                <h4 class="font-medium" x-text="item.name"></h4>
+                                <span class="text-gray-600 text-sm" x-text="item.quantity + ' x ' + formatCurrency(item.price)"></span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button x-on:click ="removeFromCart(index)" class="text-red-600 hover:text-red-800">
+                                    <!-- Icon trash -->
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="cart.length === 0" class="text-center py-4 text-gray-500">
+                        Giỏ hàng trống
+                    </div>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Tổng cộng:</span>
+                    <span class="font-bold text-blue-600" x-text="formatCurrency(total)"></span>
+                </div>
+                <button x-on:click ="placeOrder()" :disabled="cart.length === 0" class="w-full py-2 rounded-md text-white font-medium bg-blue-600 hover:bg-blue-700" :class="{'opacity-50 cursor-not-allowed': cart.length === 0}">
+                    Đặt món
+                </button>
+            </div>
+
+            <!-- Current Order Status -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <!-- Icon clock/order -->
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                    Trạng thái đơn hàng
+                </h3>
+                <div class="space-y-3" x-show="currentOrder">
+                    <div class="border border-gray-200 rounded-md p-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium" x-text="'Đơn hàng #' + currentOrder.id"></span>
+                            <span :class="getOrderStatusClass(currentOrder.status)" class="order-status" x-text="getOrderStatusText(currentOrder.status)"></span>
+                        </div>
+                        <div class="space-y-1 text-sm text-gray-600">
+                            <template x-for="(item, i) in currentOrder.items" :key="i">
+                                <div class="flex justify-between">
+                                    <span x-text="item.name + ' x' + item.quantity"></span>
+                                    <span x-text="formatCurrency(item.price * item.quantity)"></span>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="flex justify-between mt-2 pt-2 border-t border-gray-200 text-sm font-medium">
+                            <span>Thành tiền:</span>
+                            <span x-text="formatCurrency(calculateOrderTotal(currentOrder))"></span>
+                        </div>
+                    </div>
+                </div>
+                <div x-show="!currentOrder" class="text-center py-4 text-gray-500">
+                    Chưa có đơn hàng nào
+                </div>
+            </div>
+
+            <!-- Order History -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <!-- Icon history -->
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3M21 12a9 9 0 1 1-6.219-8.56" /></svg>
+                    Lịch sử đặt món
+                </h3>
+                <div class="space-y-3" x-show="orderHistory.length > 0">
+                    <template x-for="(order, index) in orderHistory" :key="index">
+                        <div class="border border-gray-200 rounded-md p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium" x-text="'Đơn hàng #' + order.id"></span>
+                                <span class="text-gray-500 text-sm" x-text="order.time"></span>
+                            </div>
+                            <div class="space-y-1 text-sm text-gray-600">
+                                <template x-for="(item, i) in order.items" :key="i">
+                                    <div class="flex justify-between">
+                                        <span x-text="item.name + ' x' + item.quantity"></span>
+                                        <span x-text="formatCurrency(item.price * item.quantity)"></span>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-200 text-sm font-medium">
+                                <span>Thành tiền:</span>
+                                <span x-text="formatCurrency(calculateOrderTotal(order))"></span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div x-show="orderHistory.length === 0" class="text-center py-4 text-gray-500">
+                    Chưa có lịch sử đặt món
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

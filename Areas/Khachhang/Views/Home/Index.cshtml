@@ -1,0 +1,452 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Areas/Khachhang/Views/Shared/_Layout.cshtml";
+}
+@section FrameworkCss {
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+}
+@section PageCss {
+    <link rel="stylesheet" href="~/css/Khachhang/trangchu.css" />
+}
+@section FrameworkJs {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+}
+@section PageJs {
+    <script src="~/js/Khachhang/trangchu.js"></script>
+}
+
+<div class="container py-4">
+    <!-- Service Selection Section -->
+    <section id="service-selection" class="mb-5">
+        <h2 class="text-center mb-4">Chọn loại dịch vụ</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card service-card h-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f37bdf97-f7a9-49ea-ad5f-7f2c9a9efd7b.png" class="card-img-top" alt="Phòng Karaoke hiện đại với hệ thống âm thanh cao cấp, ánh sáng LED đa màu và màn hình LCD lớn">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge karaoke-badge rounded-pill">KARAOKE</span>
+                            <span class="text-muted">15 phòng</span>
+                        </div>
+                        <h5 class="card-title">Phòng Karaoke</h5>
+                        <p class="card-text">Thỏa sức hát hò với bạn bè trong không gian sang trọng với hệ thống âm thanh hiện đại.</p>
+                        <button class="btn btn-primary w-100 select-service" data-service="karaoke">Chọn dịch vụ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card service-card h-100">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/29985773-a064-46b3-8786-a2d7c4f38ad7.png" class="card-img-top" alt="Bàn bida chuyên nghiệp với đèn chiếu sáng tiêu chuẩn, phông nâu đỏ và không gian thoải mái">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bida-badge rounded-pill">BIDA</span>
+                            <span class="text-muted">8 bàn</span>
+                        </div>
+                        <h5 class="card-title">Bàn Bida</h5>
+                        <p class="card-text">Trải nghiệm thi đấu chuyên nghiệp với các bàn bida tiêu chuẩn và không gian thoải mái.</p>
+                        <button class="btn btn-secondary w-100 select-service" data-service="bida">Chọn dịch vụ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Steps -->
+    <section id="booking-steps" class="mb-5 d-none">
+        <div class="booking-stepper">
+            <div class="progress-line">
+                <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <div class="row">
+                <div class="col step step-active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div>Chọn ngày & giờ</div>
+                </div>
+                <div class="col step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div>Chọn phòng/bàn</div>
+                </div>
+                <div class="col step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div>Xác nhận đặt chỗ</div>
+                </div>
+                <div class="col step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div>Thanh toán</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Date & Time Selection -->
+        <div id="step-1" class="booking-step">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Chọn ngày</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="booking-date" class="form-label">Ngày đặt chỗ</label>
+                        <input type="date" class="form-control" id="booking-date" min="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Chọn khung giờ trống</h5>
+                    <small class="text-muted">Các khung giờ màu xanh là có thể đặt</small>
+                </div>
+                <div class="card-body">
+                    <div id="time-slots" class="d-flex flex-wrap">
+                        <!-- Time slots will be populated by JavaScript -->
+                        <div class="time-slot time-slot-available">09:00 - 10:00</div>
+                        <div class="time-slot time-slot-available">10:00 - 11:00</div>
+                        <div class="time-slot time-slot-booked">11:00 - 12:00</div>
+                        <div class="time-slot time-slot-available">12:00 - 13:00</div>
+                        <div class="time-slot time-slot-available">13:00 - 14:00</div>
+                        <div class="time-slot time-slot-booked">14:00 - 15:00</div>
+                        <div class="time-slot time-slot-available">15:00 - 16:00</div>
+                        <div class="time-slot time-slot-available">16:00 - 17:00</div>
+                        <div class="time-slot time-slot-booked">17:00 - 18:00</div>
+                        <div class="time-slot time-slot-available">18:00 - 19:00</div>
+                        <div class="time-slot time-slot-available">19:00 - 20:00</div>
+                        <div class="time-slot time-slot-booked">20:00 - 21:00</div>
+                        <div class="time-slot time-slot-available">21:00 - 22:00</div>
+                        <div class="time-slot time-slot-available">22:00 - 23:00</div>
+                        <div class="time-slot time-slot-available">23:00 - 24:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" id="next-to-step-2">Tiếp tục</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Room/Table Selection -->
+        <div id="step-2" class="booking-step d-none">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Chọn loại phòng/bàn</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="room-type" class="form-label">Loại phòng/bàn</label>
+                        <select class="form-select" id="room-type">
+                            <option value="standard">Tiêu chuẩn</option>
+                            <option value="vip">VIP</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="family" class="karaoke-only">Gia đình</option>
+                            <option value="party" class="karaoke-only">Party</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Danh sách phòng/bàn trống</h5>
+                </div>
+                <div class="card-body">
+                    <div id="available-rooms">
+                        <div class="room-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Phòng Karaoke #1</h5>
+                                <span class="badge bg-success">Trống</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Loại: Tiêu chuẩn</span>
+                                <span class="fw-bold">300.000đ/giờ</span>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-outline-primary btn-sm me-2 room-detail-btn">Chi tiết</button>
+                                <button class="btn btn-primary btn-sm select-room-btn">Chọn</button>
+                            </div>
+                        </div>
+
+                        <div class="room-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Bàn Bida #3</h5>
+                                <span class="badge bg-success">Trống</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Loại: VIP</span>
+                                <span class="fw-bold">150.000đ/giờ</span>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-outline-primary btn-sm me-2 room-detail-btn">Chi tiết</button>
+                                <button class="btn btn-primary btn-sm select-room-btn">Chọn</button>
+                            </div>
+                        </div>
+
+                        <div class="room-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Phòng Combo #1</h5>
+                                <span class="badge bg-success">Trống</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Loại: Combo (Karaoke + Bida)</span>
+                                <span class="fw-bold">700.000đ/giờ</span>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-outline-primary btn-sm me-2 room-detail-btn">Chi tiết</button>
+                                <button class="btn btn-primary btn-sm select-room-btn">Chọn</button>
+                            </div>
+                        </div>
+                        <div class="room-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Phòng Karaoke #5</h5>
+                                <span class="badge bg-success">Trống</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Loại: Party</span>
+                                <span class="fw-bold">500.000đ/giờ</span>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-outline-primary btn-sm me-2 room-detail-btn">Chi tiết</button>
+                                <button class="btn btn-primary btn-sm select-room-btn">Chọn</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-step-1">Quay lại</button>
+                <button class="btn btn-primary" id="next-to-step-3">Tiếp tục</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Booking Confirmation -->
+        <div id="step-3" class="booking-step d-none">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Thông tin đặt chỗ</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="customer-name" class="form-label">Họ tên</label>
+                                <input type="text" class="form-control" id="customer-name" placeholder="Nhập họ tên">
+                            </div>
+                            <div class="mb-3">
+                                <label for="customer-phone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="customer-phone" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div class="mb-3">
+                                <label for="customer-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="customer-email" placeholder="Nhập email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="special-requests" class="form-label">Yêu cầu đặc biệt (nếu có)</label>
+                                <textarea class="form-control" id="special-requests" rows="3" placeholder="Ví dụ: Trang trí sinh nhật, yêu cầu thức ăn..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="booking-summary sticky-top" style="top: 20px;">
+                        <h5 class="mb-3">Tóm tắt đặt chỗ</h5>
+                        <div class="mb-3">
+                            <h6 id="summary-service-type">Dịch vụ: Karaoke</h6>
+                            <p id="summary-room">Phòng: #1 (Tiêu chuẩn)</p>
+                            <p id="summary-date">Ngày: 15/05/2023</p>
+                            <p id="summary-time">Thời gian: 18:00 - 20:00</p>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tổng tiền:</span>
+                                <span id="summary-total" class="fw-bold">600.000đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Tiền cọc (30%):</span>
+                                <span id="summary-deposit" class="fw-bold">180.000đ</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="countdown-timer">
+                                <i class="bi bi-clock me-2"></i>
+                                <span id="hold-timer">05:00</span>
+                            </div>
+                            <button class="btn btn-success" id="confirm-booking">Xác nhận đặt chỗ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-step-2">Quay lại</button>
+                <button class="btn btn-primary d-none" id="next-to-step-4">Tiếp tục</button>
+            </div>
+        </div>
+        <!-- Step 4: Payment -->
+        <div id="step-4" class="booking-step d-none">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Thanh toán đặt cọc</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- ...giữ nguyên phần chọn phương thức thanh toán... -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="booking-summary sticky-top" style="top: 20px;">
+                        <h5 class="mb-3">Tóm tắt thanh toán</h5>
+                        <div class="mb-3">
+                            <p id="payment-summary-service">Dịch vụ: Karaoke</p>
+                            <p id="payment-summary-room">Phòng: #1 (Tiêu chuẩn)</p>
+                            <p id="payment-summary-date">Ngày: 15/05/2023</p>
+                            <p id="payment-summary-time">Thời gian: 18:00 - 20:00</p>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tổng tiền:</span>
+                                <span class="fw-bold">600.000đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tiền cọc:</span>
+                                <span class="fw-bold">180.000đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Còn lại thanh toán:</span>
+                                <span class="fw-bold">420.000đ</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-success w-100" id="complete-payment">Hoàn tất thanh toán</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Đã bỏ nút "Lưu lại để thanh toán sau" -->
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary" id="back-to-step-3">Quay lại</button>
+            </div>
+        </div>
+
+        <!-- Booking History -->
+        <section id="booking-history" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#current-bookings" data-bs-toggle="tab">Lịch đặt chỗ hiện tại</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#past-bookings" data-bs-toggle="tab">Lịch sử đặt chỗ</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="current-bookings">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã đơn</th>
+                                            <th>Dịch vụ</th>
+                                            <th>Ngày giờ</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#K20230515</td>
+                                            <td>Karaoke - Phòng VIP</td>
+                                            <td>18/05/2023 - 18:00-20:00</td>
+                                            <td>800.000đ</td>
+                                            <td><span class="badge bg-success">Đã xác nhận</span></td>
+                                            <td>
+                                                <!-- Đã bỏ nút "Chi tiết" -->
+                                                <button class="btn btn-sm btn-outline-danger cancel-booking">Hủy</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#B20230516</td>
+                                            <td>Bida - Bàn số 3</td>
+                                            <td>19/05/2023 - 15:00-17:00</td>
+                                            <td>300.000đ</td>
+                                            <td><span class="badge bg-warning">Chờ xác nhận</span></td>
+                                            <td>
+                                                <!-- Đã bỏ nút "Chi tiết" -->
+                                                <button class="btn btn-sm btn-outline-danger cancel-booking">Hủy</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+<!-- Modal for Room Details -->
+<div class="modal fade" id="roomDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="roomDetailModalTitle">Chi tiết phòng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/42f49a63-c734-4463-9c58-39ade622c1b1.png" class="img-fluid rounded mb-3" alt="Phòng Karaoke VIP rộng rãi với ghế sofa da màu nâu, hệ thống âm thanh cao cấp và màn hình LCD 65 inch">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 id="modal-room-name">Phòng Karaoke #1</h4>
+                        <p><strong>Loại:</strong> <span id="modal-room-type">Tiêu chuẩn</span></p>
+                        <p><strong>Giá:</strong> <span id="modal-room-price">300.000đ/giờ</span></p>
+                        <p><strong>Sức chứa:</strong> <span id="modal-room-capacity">6-8 người</span></p>
+                        <div class="mb-3">
+                            <h6>Tiện ích:</h6>
+                            <ul id="modal-room-amenities">
+                                <li>Hệ thống âm thanh cao cấp</li>
+                                <li>Màn hình LCD 55 inch</li>
+                                <li>Ghế sofa êm ái</li>
+                                <li>Điều hòa nhiệt độ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="select-room-from-modal">Chọn phòng này</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking Success Modal -->
+<div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Đặt chỗ thành công!</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                </div>
+                <h4 id="success-message">Đã đặt chỗ thành công!</h4>
+                <p id="booking-reference" class="fw-bold">Mã đơn: #K20230515</p>
+                <p>Chúng tôi đã gửi thông tin đặt chỗ đến email của bạn. Vui lòng kiểm tra hộp thư đến và thư mục spam.</p>
+                <div class="alert alert-info mt-3">
+                    <p class="mb-1"><strong>Lưu ý:</strong> Hãy đến đúng giờ để không ảnh hưởng đến khung giờ đã đặt.</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Hoàn tất</button>
+                <!-- Đã bỏ nút "In hóa đơn" -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Thông tin";
+    Layout = "~/Areas/Khachhang/Views/Shared/_Layout.cshtml";
+}
+@section FrameworkCss { }
+@section PageCss {
+        <link rel="stylesheet" href="~/css/Khachhang/thongtin.css" />
+}
+@section FrameworkJs { }
+@section PageJs {
+    <script src="~/js/Khachhang/thongtin.js"></script>
+}
+<div class="main-content">
+    <div class="sidebar">
+        <h2><i class="fas fa-info-circle"></i> Thông tin</h2>
+    </div>
+    <div class="main">
+        <div class="card" id="info-tab">
+            <h3>Thông tin khách hàng</h3>
+            <p><strong>Anh/Chị:</strong> <span id="name">Nguyễn Văn A</span></p>
+            <p><strong>Số điện thoại:</strong> <span id="phone">0909123456</span></p>
+            <p><strong>Email:</strong> <span id="email">a.nguyen@gmail.com</span></p>
+            <p><strong>Tài khoản:</strong> <span id="username">nguyenvana</span></p>
+            <p class="password-field">
+                <strong>Mật khẩu:</strong>
+                <span id="masked-password">••••••</span>
+                <i class="fas fa-eye" id="toggle-main-password"></i>
+            </p>
+            <button class="btn btn-confirm" onclick="showEditTab()">Chỉnh sửa</button>
+        </div>
+
+        <div class="card" id="edit-tab">
+            <div class="edit-actions">
+                <button class="btn btn-cancel" onclick="cancelEdit()">← Quay lại</button>
+                <button class="btn btn-confirm" onclick="saveEdit()">Lưu</button>
+            </div>
+            <h3>Chỉnh sửa thông tin</h3>
+            <p><strong>Anh/Chị:</strong><br><input id="edit-name" style="width:100%" /></p>
+            <p><strong>Số điện thoại:</strong><br><input id="edit-phone" style="width:100%" /></p>
+            <p><strong>Email:</strong><br><input id="edit-email" style="width:100%" /></p>
+            <p><strong>Tài khoản:</strong><br><input id="edit-username" style="width:100%" maxlength="25" /></p>
+            <p class="password-field">
+                <strong><a href="#" onclick="showSecurityTab()">Mật khẩu:</a></strong>
+                <span id="masked-password-edit">••••••</span>
+                <i class="fas fa-eye" id="toggle-edit-password"></i>
+            </p>
+        </div>
+
+        <div class="card" id="security-tab">
+            <h3>Bảo mật</h3>
+            <p><strong>Mật khẩu mới:</strong><br><input type="password" id="new-password" style="width: 100%;"></p>
+            <p><strong>Nhập lại mật khẩu mới:</strong><br><input type="password" id="confirm-password" style="width: 100%;"></p>
+            <div class="security-actions">
+                <button class="btn btn-confirm" onclick="confirmPasswordChange()">Xác nhận</button>
+                <button class="btn btn-cancel" onclick="cancelPasswordChange()">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
