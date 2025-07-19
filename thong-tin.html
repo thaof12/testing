@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thông tin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .header {
+      background-color: #1f43b4;
+      padding: 20px 0;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+    .nav { display: flex; gap: 40px; }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: 0.3s ease;
+    }
+    .nav a:hover { opacity: 0.8; }
+    .nav a.active:not(.no-underline)::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: #f8c100;
+    }
+    .main-content { display: flex; flex: 1; }
+    .sidebar {
+      width: 240px;
+      background: white;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .sidebar h2 {
+      margin-bottom: 30px;
+      color: #3f51b5;
+      transition: 0.3s;
+    }
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    .card p {
+      margin: 10px 0;
+    }
+    .password-field i {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .security-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-confirm {
+      background-color: #1f43b4;
+      color: white;
+    }
+    .btn-cancel {
+      background-color: #ccc;
+      color: #000;
+    }
+    #edit-tab, #security-tab { display: none; }
+    .edit-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .edit-actions .btn { margin: 0 5px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="khachhang.html" class="logo">LittleFish</a>
+      <nav class="nav">
+        <li><a href="khachhang.html">Trang chủ</a></li>
+        <a href="#" class="no-underline">Đặt chỗ</a>
+        <a href="#" class="active no-underline" id="btn-thongtin">Thông tin</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="sidebar">
+      <h2><i class="fas fa-info-circle"></i> Thông tin</h2>
+    </div>
+    <div class="main">
+      <div class="card" id="info-tab">
+        <h3>Thông tin khách hàng</h3>
+        <p><strong>Anh/Chị:</strong> <span id="name">Nguyễn Văn A</span></p>
+        <p><strong>Số điện thoại:</strong> <span id="phone">0909123456</span></p>
+        <p><strong>Email:</strong> <span id="email">a.nguyen@gmail.com</span></p>
+        <p><strong>Tài khoản:</strong> <span id="username">nguyenvana</span></p>
+        <p class="password-field">
+          <strong>Mật khẩu:</strong>
+          <span id="masked-password">••••••</span>
+          <i class="fas fa-eye" id="toggle-main-password"></i>
+        </p>
+        <button class="btn btn-confirm" onclick="showEditTab()">Chỉnh sửa</button>
+      </div>
+
+      <div class="card" id="edit-tab">
+        <div class="edit-actions">
+          <button class="btn btn-cancel" onclick="cancelEdit()">← Quay lại</button>
+          <button class="btn btn-confirm" onclick="saveEdit()">Lưu</button>
+        </div>
+        <h3>Chỉnh sửa thông tin</h3>
+        <p><strong>Anh/Chị:</strong><br><input id="edit-name" style="width:100%" /></p>
+        <p><strong>Số điện thoại:</strong><br><input id="edit-phone" style="width:100%" /></p>
+        <p><strong>Email:</strong><br><input id="edit-email" style="width:100%" /></p>
+        <p><strong>Tài khoản:</strong><br><input id="edit-username" style="width:100%" maxlength="25" /></p>
+        <p class="password-field">
+          <strong><a href="#" onclick="showSecurityTab()">Mật khẩu:</a></strong>
+          <span id="masked-password-edit">••••••</span>
+          <i class="fas fa-eye" id="toggle-edit-password"></i>
+        </p>
+      </div>
+
+      <div class="card" id="security-tab">
+        <h3>Bảo mật</h3>
+        <p><strong>Mật khẩu mới:</strong><br><input type="password" id="new-password" style="width: 100%;"></p>
+        <p><strong>Nhập lại mật khẩu mới:</strong><br><input type="password" id="confirm-password" style="width: 100%;"></p>
+        <div class="security-actions">
+          <button class="btn btn-confirm" onclick="confirmPasswordChange()">Xác nhận</button>
+          <button class="btn btn-cancel" onclick="cancelPasswordChange()">Hủy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <script>
+    let realPassword = "123456";
+    let mainPasswordVisible = false;
+    let editPasswordVisible = false;
+
+    const maskedPassword = document.getElementById('masked-password');
+    const toggleMainPassword = document.getElementById('toggle-main-password');
+    toggleMainPassword.onclick = () => {
+      mainPasswordVisible = !mainPasswordVisible;
+      maskedPassword.textContent = mainPasswordVisible ? realPassword : '••••••';
+      toggleMainPassword.className = mainPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye';
+    };
+
+    const maskedPasswordEdit = document.getElementById('masked-password-edit');
+    const toggleEditPassword = document.getElementById('toggle-edit-password');
+    toggleEditPassword.onclick = () => {
+      editPasswordVisible = !editPasswordVisible;
+      maskedPasswordEdit.textContent = editPasswordVisible ? realPassword : '••••••';
+      toggleEditPassword.className = editPasswordVisible ? 'fas fa-eye-slash' : 'fas fa-eye';
+    };
+
+    document.getElementById("logo").onclick =
+    document.getElementById("home-link").onclick = () => {
+      document.getElementById('edit-tab').style.display = 'none';
+      document.getElementById('security-tab').style.display = 'none';
+      document.getElementById('info-tab').style.display = 'block';
+    };
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@gmail\.com$/.test(email);
+    }
+    function isValidPhone(phone) {
+      return /^0\d{9}$/.test(phone);
+    }
+
+    function showEditTab() {
+      document.getElementById('info-tab').style.display = 'none';
+      document.getElementById('security-tab').style.display = 'none';
+      document.getElementById('edit-tab').style.display = 'block';
+
+      document.getElementById('edit-name').value = document.getElementById('name').textContent;
+      document.getElementById('edit-phone').value = document.getElementById('phone').textContent;
+      document.getElementById('edit-email').value = document.getElementById('email').textContent;
+      document.getElementById('edit-username').value = document.getElementById('username').textContent;
+
+      maskedPasswordEdit.textContent = '••••••';
+      toggleEditPassword.className = 'fas fa-eye';
+      editPasswordVisible = false;
+    }
+
+    function cancelEdit() {
+      document.getElementById('edit-tab').style.display = 'none';
+      document.getElementById('info-tab').style.display = 'block';
+    }
+
+    function saveEdit() {
+      const name = document.getElementById('name').textContent.trim();
+      const phone = document.getElementById('phone').textContent.trim();
+      const email = document.getElementById('email').textContent.trim();
+      const username = document.getElementById('username').textContent.trim();
+
+      const newName = document.getElementById('edit-name').value.trim();
+      const newPhone = document.getElementById('edit-phone').value.trim();
+      const newEmail = document.getElementById('edit-email').value.trim();
+      const newUsername = document.getElementById('edit-username').value.trim();
+
+      const errors = [];
+      if (!isValidPhone(newPhone)) errors.push("Số điện thoại không hỗ trợ");
+      if (!isValidEmail(newEmail)) errors.push("Email không hợp lệ");
+      if (newUsername.length > 25) errors.push("Tên tài khoản không được quá 25 ký tự");
+
+      if (errors.length > 0) {
+        alert(errors.join("\n"));
+        return;
+      }
+
+      const isChanged = newName !== name || newPhone !== phone || newEmail !== email || newUsername !== username;
+
+      document.getElementById('name').textContent = newName;
+      document.getElementById('phone').textContent = newPhone;
+      document.getElementById('email').textContent = newEmail;
+      document.getElementById('username').textContent = newUsername;
+
+      document.getElementById('edit-tab').style.display = 'none';
+      document.getElementById('info-tab').style.display = 'block';
+
+      alert(isChanged ? "Đã lưu thay đổi" : "Đã lưu");
+    }
+
+    function showSecurityTab() {
+      document.getElementById('info-tab').style.display = 'none';
+      document.getElementById('edit-tab').style.display = 'none';
+      document.getElementById('security-tab').style.display = 'block';
+    }
+
+    function confirmPasswordChange() {
+      const newPassword = document.getElementById('new-password').value.trim();
+      const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+      if (newPassword.length <= 5) return alert("Mật khẩu phải trên 5 ký tự");
+      if (newPassword !== confirmPassword) return alert("Mật khẩu mới không trùng khớp");
+
+      realPassword = newPassword;
+      alert("Đã đổi mật khẩu");
+      document.getElementById('security-tab').style.display = 'none';
+      document.getElementById('edit-tab').style.display = 'block';
+    }
+
+    function cancelPasswordChange() {
+      if (confirm("Xác nhận hủy")) {
+        document.getElementById('security-tab').style.display = 'none';
+        document.getElementById('edit-tab').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

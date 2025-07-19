@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background: #f8f8f8;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background-color: #1f43b4;
+  padding: 20px 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 16px;
+  position: relative;
+  transition: 0.3s;
+  opacity: 1;
+}
+
+.nav a:hover {
+  color: #fff;
+  opacity: 0.7; /* hiệu ứng mờ khi hover */
+}
+
+.nav a.active {
+  color: white;
+  font-weight: bold;
+}
+
+/* Gạch vàng chỉ xuất hiện với các mục KHÁC "trang chủ" và "đặt chỗ" */
+.nav a.active:not(.no-underline)::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #f8c100;
+}
+
+/* Footer */
+.footer {
+  background: #1f1f1f;
+  color: #f0f0f0;
+  padding: 20px 20px 10px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-column {
+  flex: 1 1 250px;
+}
+
+.footer-column h2,
+.footer-column h4 {
+  color: #009df8;
+  margin-bottom: 10px;
+}
+
+.footer-column p,
+.footer-column a {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.8;
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+  color: #f8c100;
+}
+
+.payment-methods i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: white;
+  background-color: #2c2f4a;
+}
+
+.payment-methods i.fa-money-bill-wave {
+  background-color: #4caf50;
+}
+
+.payment-methods i.fa-paypal {
+  background-color: #003087;
+}
+
+.payment-methods i.fa-credit-card {
+  background-color: #2196f3;
+}
+
+.payment-methods i.fa-cc-visa {
+  background-color: #1a1f71;
+}
+
+.payment-methods i.fa-university {
+  background-color: #ffb300;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  margin-right: 10px;
+  transition: 0.3s ease;
+}
+
+.social-icons i.fa-facebook-f { color: #3b5998; }
+.social-icons i.fa-youtube { color: #ff0000; }
+.social-icons i.fa-twitter { color: #1da1f2; }
+.social-icons i.fa-instagram { color: #e4405f; }
+
+.social-icons i:hover {
+  transform: scale(1.1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding-top: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #999;
+}
