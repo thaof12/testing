@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\mcvw2.props" />
+</Project>
